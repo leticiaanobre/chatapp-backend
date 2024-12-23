@@ -5,6 +5,10 @@ import generateToken from "../lib/utils.js"
 export const signup =  async (req, res) => {
     const{fullName, email, password} = req.body
     try {
+        if(!fullName || !email || !password) {
+            return res.status(400).json({message: "All fields are required and can not be empty"})
+        }
+
         if (password.length <  6) {
             return res.status(400).json({message: "Password must be at least 6 characters"})
         }
@@ -19,7 +23,7 @@ export const signup =  async (req, res) => {
         const newUser = new User({
             fullName,
             email,
-            passwodr: hashedPassword,
+            password: hashedPassword,
         })
 
         if(newUser) {
