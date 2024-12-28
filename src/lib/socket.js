@@ -11,9 +11,18 @@ const io = new Server(server, {
     }
 })
 
+//used to store online users
+const userSocketMap = {} //{userId: socketId}
+
 // listen to any incoming connections
 io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
+
+    const userId =socket.handshake.query.userId
+    if(userId) userSocketMap[userId] = socket.id //whenever the user is online, we update it in the server
+
+    //io.emmit() is used to send events to all the connected clients
+    io.emit("getOnlineUsers", Object.keys(userSocketMap)) //broadcast to every single user tha is connected
 
     socket.on("disconnect", () => {
         console.log("A user disconnected", socket.id)
