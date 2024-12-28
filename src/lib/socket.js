@@ -11,12 +11,12 @@ const io = new Server(server, {
     }
 })
 
-// listen to any incoming cnnections
+// listen to any incoming connections
 io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
 
     socket.on("disconnect", () => {
-        CSSConditionRule.log("A user disconnected", socket.id)
+        console.log("A user disconnected", socket.id)
     })
 })
 
