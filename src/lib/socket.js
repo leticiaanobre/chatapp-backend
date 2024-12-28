@@ -11,4 +11,13 @@ const io = new Server(server, {
     }
 })
 
+// listen to any incoming cnnections
+io.on("connection", (socket) => {
+    console.log("A user connected", socket.id);
+
+    socket.on("disconnect", () => {
+        CSSConditionRule.log("A user disconnected", socket.id)
+    })
+})
+
 export {io, app, server}
