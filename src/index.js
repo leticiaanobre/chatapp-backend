@@ -16,7 +16,7 @@ const PORT = process.env.PORT
 app.use(express.json()); //allow to extract the json data aout of the bodyrequest
 app.use(cookieParser()); // allow to parse the cookie and grab the values out of it
 app.use(cors({
-    origin: "https://communitychatapp.vercel.app/",
+    origin: "http://localhost:5173",
     credentials: true //allow cookies or authorization headers to be sent with the request
 }))
 
